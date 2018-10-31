@@ -40,15 +40,6 @@ public class BasicCalendar implements MonkeyCalendar {
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicCalendar.class);
 
-    /** The open hour. */
-    private final int openHour;
-
-    /** The close hour. */
-    private final int closeHour;
-
-    /** The tz. */
-    private final TimeZone tz;
-
     /** The holidays. */
     protected final Set<Integer> holidays = new TreeSet<Integer>();
 
@@ -63,9 +54,6 @@ public class BasicCalendar implements MonkeyCalendar {
      */
     public BasicCalendar(MonkeyConfiguration cfg) {
         this.cfg = cfg;
-        openHour = (int) cfg.getNumOrElse("simianarmy.calendar.openHour", 9);
-        closeHour = (int) cfg.getNumOrElse("simianarmy.calendar.closeHour", 15);
-        tz = TimeZone.getTimeZone(cfg.getStrOrElse("simianarmy.calendar.timezone", "America/Los_Angeles"));
     }
 
     /**
@@ -79,9 +67,6 @@ public class BasicCalendar implements MonkeyCalendar {
      *            the timezone
      */
     public BasicCalendar(int open, int close, TimeZone timezone) {
-        openHour = open;
-        closeHour = close;
-        tz = timezone;
     }
 
     /**
@@ -94,23 +79,8 @@ public class BasicCalendar implements MonkeyCalendar {
      * @param timezone
      *            the timezone
      */
-    public BasicCalendar(MonkeyConfiguration cfg, int open, int close, TimeZone timezone) {
+    public BasicCalendar(MonkeyConfiguration cfg) {
         this.cfg = cfg;
-        openHour = open;
-        closeHour = close;
-        tz = timezone;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int openHour() {
-        return openHour;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int closeHour() {
-        return closeHour;
     }
 
     /** {@inheritDoc} */
